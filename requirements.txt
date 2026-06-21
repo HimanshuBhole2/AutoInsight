@@ -1,0 +1,73 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+mangum==0.19.0
+
+# Async HTTP
+httpx==0.28.1
+
+# Pydantic
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# Database
+sqlalchemy==2.0.36
+alembic==1.14.0
+asyncpg==0.30.0
+# psycopg2-binary: use pre-built wheel → pip install psycopg2-binary --only-binary=:all:
+# On Python 3.14 install: pip install psycopg2-binary --pre
+
+# Celery + Redis
+celery==5.4.0
+redis==5.2.1
+# flower==2.0.1          # optional: Celery monitoring UI (run separately)
+
+# LangGraph / LangChain
+langgraph==0.2.60
+langchain==0.3.14
+langchain-openai==0.3.0
+langchain-anthropic==0.3.2
+langchain-community==0.3.14
+langsmith==0.2.7
+
+# LLM SDKs
+openai==1.59.7
+anthropic==0.42.0
+
+# Data + analysis
+pandas==2.2.3
+numpy>=1.26,<2           # langchain-community 0.3.x requires numpy<2
+matplotlib==3.10.0
+plotly==5.24.1
+# kaleido==0.2.1         # optional: only needed for static chart export (no CI wheel)
+
+# RAG + embeddings
+chromadb==0.6.3
+tiktoken==0.8.0
+
+# AWS
+boto3==1.35.97
+
+# Observability
+mlflow==2.19.0
+prometheus-client==0.21.1
+
+# Code safety
+RestrictedPython==7.4
+
+# Utilities
+python-multipart==0.0.20
+python-dotenv==1.0.1
+slowapi==0.1.9
+structlog==24.4.0
+tenacity==9.0.0
+
+# Dev / test
+pytest==8.3.4
+pytest-asyncio==0.25.0
+pytest-cov==6.0.0
+httpx==0.28.1
+ruff==0.8.6
+black==24.10.0
+mypy==1.14.0
+pre-commit==4.0.1

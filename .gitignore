@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# LangSmith / LangChain cache
+.langchain/
+
+# Chroma (dev vector store)
+chroma_db/
+chroma/
+
+# Generated charts (temp)
+/tmp/charts/
+
+# Uploaded datasets (local dev)
+data/uploads/
+
+# Alembic env (generated)
+app/db/migrations/env.py
+
+# Docker
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Dist / build artifacts
+htmlcov/
+site/
