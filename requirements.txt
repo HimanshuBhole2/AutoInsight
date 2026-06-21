@@ -20,7 +20,7 @@ asyncpg==0.30.0
 # Celery + Redis
 celery==5.4.0
 redis==5.2.1
-flower==2.0.1
+# flower==2.0.1          # optional: Celery monitoring UI (run separately)
 
 # LangGraph / LangChain
 langgraph==0.2.60
@@ -36,10 +36,10 @@ anthropic==0.42.0
 
 # Data + analysis
 pandas==2.2.3
-numpy==2.2.0
+numpy>=1.26,<2           # langchain-community 0.3.x requires numpy<2
 matplotlib==3.10.0
 plotly==5.24.1
-kaleido==0.2.1
+# kaleido==0.2.1         # optional: only needed for static chart export (no CI wheel)
 
 # RAG + embeddings
 chromadb==0.6.3
