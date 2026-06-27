@@ -62,7 +62,6 @@ data/uploads/
 app/db/migrations/env.py
 
 # Docker
-.dockerignore
 
 # Logs
 *.log
