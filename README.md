@@ -17,10 +17,11 @@ Full design: see [AutoInsight_HLD_LLD.md](AutoInsight_HLD_LLD.md)
 ## Quick start
 
 ### Prerequisites
-- Python 3.11+ (3.14 works; note psycopg2-binary needs `--pre` flag)
-- Redis (for Celery)
-- PostgreSQL (for job/report metadata)
+- Python 3.11 (use `py -3.11 -m venv .venv` on Windows)
+- Docker Desktop (runs Redis + PostgreSQL via `make up`)
 - API keys: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`
+
+> **First step:** `cp .env.example .env` — fill in your API keys. Every variable is documented with an inline comment.
 
 ### Local setup
 
