@@ -1,0 +1,39 @@
+# Version control
+.git
+.github
+
+# Python artifacts
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# Virtual environments
+.venv
+venv
+env
+
+# Dev and test — not needed in image
+tests/
+docs/
+eval/
+bench/
+scripts/
+
+# Secrets — never bake into image
+.env
+.env.*
+!.env.example
+
+# Data and generated files
+chroma_db/
+data/
+htmlcov/
+.coverage
+
+# Docs
+*.md
+!README.md
