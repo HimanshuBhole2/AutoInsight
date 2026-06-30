@@ -19,6 +19,7 @@ python_version = "3.11"
 strict = false
 ignore_missing_imports = true
 plugins = ["pydantic.mypy"]
+exclude = ["alembic/"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

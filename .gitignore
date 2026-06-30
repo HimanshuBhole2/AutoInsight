@@ -55,8 +55,8 @@ chroma/
 # Generated charts (temp)
 /tmp/charts/
 
-# Uploaded datasets (local dev)
-data/uploads/
+# Uploaded datasets (local dev) — keep directory tracked, ignore contents
+data/uploads/*.csv
 
 # Alembic env (generated)
 app/db/migrations/env.py
