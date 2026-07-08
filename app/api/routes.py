@@ -53,7 +53,6 @@ async def upload_dataset(file: UploadFile, db: AsyncSession = Depends(get_db)) -
     )
     db.add(row)
     await db.flush()
-
     return {"dataset_id": dataset_id, "filename": file.filename, "status": "READY"}
 
 
