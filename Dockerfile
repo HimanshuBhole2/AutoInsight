@@ -31,7 +31,8 @@ COPY --from=builder /install /usr/local
 # Copy only application source — tests/docs/venv excluded via .dockerignore
 COPY app/ ./app/
 COPY prompts/ ./prompts/
-COPY pyproject.toml ./
+COPY alembic/ ./alembic/
+COPY alembic.ini pyproject.toml ./
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
