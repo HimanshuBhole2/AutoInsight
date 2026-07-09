@@ -62,3 +62,54 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t autoinsight:ci .
+
+  deploy:
+    name: Deploy (ECR + Lambda stub)
+    runs-on: ubuntu-latest
+    needs: [lint-typecheck, test, build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check AWS secrets configured
+        id: aws-check
+        run: |
+          if [ -n "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
+            echo "configured=true" >> $GITHUB_OUTPUT
+          else
+            echo "configured=false" >> $GITHUB_OUTPUT
+            echo "AWS secrets not set — skipping ECR push and Lambda deploy"
+          fi
+
+      - name: Configure AWS credentials
+        if: steps.aws-check.outputs.configured == 'true'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION || 'us-east-1' }}
+
+      - name: Login to Amazon ECR
+        if: steps.aws-check.outputs.configured == 'true'
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push image to ECR
+        if: steps.aws-check.outputs.configured == 'true'
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: autoinsight
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Deploy to Lambda (stub — replace echo on Day 9)
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry || 'ECR_NOT_CONFIGURED' }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          echo "Deploy target: $ECR_REGISTRY/autoinsight:$IMAGE_TAG"
+          echo "TODO Day 9: aws lambda update-function-code --function-name autoinsight-api --image-uri $ECR_REGISTRY/autoinsight:$IMAGE_TAG"
