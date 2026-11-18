@@ -16,6 +16,7 @@ from app.pipeline.narrative_writer import narrative_writer_node
 from app.pipeline.rag_feedback_writer import rag_feedback_writer_node
 from app.pipeline.rag_retriever import rag_retriever_node
 from app.pipeline.self_critic import self_critic_node
+from app.pipeline.state import AgentState
 from app.pipeline.validator import validator_node
 
 
@@ -33,7 +34,10 @@ def _should_retry(state: dict[str, Any]) -> str:
 
 
 def build_graph() -> Any:
-    graph = StateGraph(dict)
+    # Typed state → one channel per key, so partial node returns are merged.
+    # Nodes are annotated with plain dict[str, Any]; Any keeps mypy from
+    # requiring every node signature to name AgentState.
+    graph: Any = StateGraph(AgentState)
 
     graph.add_node("data_profiler", data_profiler_node)
     graph.add_node("goal_parser", goal_parser_node)
