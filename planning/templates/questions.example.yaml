@@ -1,0 +1,44 @@
+# Example question set. Copy to fixtures/questions.yaml in the new repo and extend to 15.
+# Mix: 8 clear, 3 vague, 2 wrong-column, 2 multi-part.
+
+- id: q01
+  csv: sales.csv
+  question: "Which region grew the fastest in 2024?"
+  type: clear
+  expected:
+    intent: compare
+    columns: [region, revenue, date]
+    answer_contains: ["West"]
+
+- id: q02
+  csv: sales.csv
+  question: "Show me the monthly revenue trend."
+  type: clear
+  expected:
+    intent: trend
+    columns: [date, revenue]
+    chart: line
+
+- id: q03
+  csv: sales.csv
+  question: "how are we doing?"
+  type: vague
+  expected:
+    ambiguous: true
+
+- id: q04
+  csv: churn.csv
+  question: "What is our profit margin?"
+  type: wrong_column
+  expected:
+    unknown_columns_not_empty: true
+
+- id: q05
+  csv: churn.csv
+  question: "Which plan has the highest churn rate, and does tenure matter?"
+  type: multi_part
+  expected:
+    intent: compare
+    columns: [plan, churned, tenure_months]
+    min_steps: 2
+    answer_contains: ["monthly"]
